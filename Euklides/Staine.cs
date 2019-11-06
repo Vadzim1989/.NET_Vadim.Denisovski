@@ -22,33 +22,40 @@ namespace Euklides
         /// </returns>
         public int GetBiGCD(int a, int b, out long staineTime) // НОД 2-ух чисел с выходным параметром времени
         {
+            long time;
+            int result;
             Stopwatch st = new Stopwatch();
             st.Start();
+
             if (a == 0) { st.Stop(); staineTime = st.ElapsedMilliseconds; return b; }
             if (b == 0) { st.Stop(); staineTime = st.ElapsedMilliseconds; return a; }
             if (a == b) { st.Stop(); staineTime = st.ElapsedMilliseconds; return a; }
             if (a == 1 || b == 1) { st.Stop(); staineTime = st.ElapsedMilliseconds; return 1; }
             if ((a % 2 == 0) && (b % 2 == 0))
             {
+                result = 2 * GetBiGCD(a / 2, b / 2, out time);
                 st.Stop();
-                staineTime = st.ElapsedMilliseconds;
-                return 2 * GetBiGCD(a / 2, b / 2, out _);
+                staineTime = st.ElapsedMilliseconds + time;
+                return result;
             }
             if ((a % 2 == 0) && (b % 2 != 0))
             {
+                result = GetBiGCD(a / 2, b, out time);
                 st.Stop();
-                staineTime = st.ElapsedMilliseconds;
-                return GetBiGCD(a / 2, b, out _);
+                staineTime = st.ElapsedMilliseconds + time;
+                return result;
             }
             if ((a % 2 != 0) && (b % 2 == 0))
             {
+                result = GetBiGCD(a, b / 2, out time);
                 st.Stop();
-                staineTime = st.ElapsedMilliseconds;
-                return GetBiGCD(a, b / 2, out _);
+                staineTime = st.ElapsedMilliseconds + time;
+                return result;
             }
+            result = GetBiGCD(b, Math.Abs(a - b), out time);
             st.Stop();
-            staineTime = st.ElapsedMilliseconds;
-            return GetBiGCD(b, Math.Abs(a - b), out _);
+            staineTime = st.ElapsedMilliseconds + time;
+            return result;
         }
     }
 }
