@@ -15,7 +15,7 @@ namespace Euklides.Tests
             int expeted = 12; // ожидаемый результат 
             // action
             Euklides ea = new Euklides(); // создаем обьъект класса Euklides
-            int actual = ea.GetGCD(a, b); // вызываем метод для рассчета алгоритма Евклида. Передаем наши переменный.
+            int actual = ea.GetGCD(a, b, out long time); // вызываем метод для рассчета алгоритма Евклида. Передаем наши переменный.
             // assert
             Assert.AreEqual(expeted, actual); // производим сравнение ожидаемого результата с реальным результатом.
         }

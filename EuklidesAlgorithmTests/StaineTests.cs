@@ -20,7 +20,7 @@ namespace Euklides.Tests
             int expeted = 12; // ожидаемый результат 
             // action
             Staine st = new Staine(); // создаем обьъект класса Staine
-            int actual = st.GetBiGCD(a, b); // вызываем метод для рассчета алгоритма Стейна. Передаем наши переменный.
+            int actual = st.GetBiGCD(a, b, out long time); // вызываем метод для рассчета алгоритма Стейна. Передаем наши переменный.
             // assert
             Assert.AreEqual(expeted, actual); // производим сравнение ожидаемого результата с реальным результатом.
         }
