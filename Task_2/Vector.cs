@@ -72,6 +72,41 @@ namespace Task_2
             Vec.z = obj1.z * obj2.z;
             return Vec;
         }
-        //...
+        /// <summary>
+        /// Вычесляем длину вектора
+        /// </summary>
+        /// <returns>
+        /// Длина вектора
+        /// </returns>
+        public double Lenght()
+        {
+            return Math.Sqrt((x * x) + (y * y) + (z * z));
+        }
+        /// <summary>
+        /// Перегружаем оператор равенства
+        /// </summary>
+        /// <param name="obj1"></param>
+        /// <param name="obj2"></param>
+        /// <returns>
+        /// Результат сравнения
+        /// </returns>
+        public static bool operator == (Vector obj1, Vector obj2)
+        {         
+            bool obj1Null = ReferenceEquals(obj1, null), obj2Null = ReferenceEquals(obj2, null);            
+            if (obj1Null || obj2Null)            
+                return obj1Null && obj2Null;
+            return ReferenceEquals(obj1, obj2) || obj1.Lenght() == obj2.Lenght();
+        }
+        /// <summary>
+        /// Перегружаем оператор неравенства
+        /// </summary>
+        /// <param name="obj1"></param>
+        /// <param name="obj2"></param>
+        /// <returns></returns>
+        public static bool operator != (Vector obj1, Vector obj2)
+        {
+            return !(obj1 == obj2);
+        }
     }
 }
+    
