@@ -107,6 +107,29 @@ namespace Task_2
         {
             return !(obj1 == obj2);
         }
+
+        /// <summary>
+        /// Данный метод проверяет экземпляры тождество
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>        
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector)            
+                return true; 
+            return base.Equals(obj);
+        }
+        /// <summary>
+        /// Метод генерации хэш-кодов
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            int hash = 3, hashCode = x.GetHashCode();
+            hashCode = hash * hashCode + y.GetHashCode();
+            hashCode = hash * hashCode + z.GetHashCode();
+            return hashCode;
+        }
     }
 }
     
