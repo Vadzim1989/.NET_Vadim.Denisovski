@@ -6,24 +6,31 @@ using System.Threading.Tasks;
 
 namespace Task_2
 {
-    class Vector
+    public class Vector
     {
         /// <summary>
         /// координаты
         /// </summary>
-        public int x, y, z;
+        public double x, y, z;
         /// <summary>
         /// параметризованный конструктор
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        public Vector(int x = 0, int y = 0, int z = 0)
+        public Vector(double x = 0, double y = 0, double z = 0)
         {
             this.x = x;
             this.y = y;
             this.z = z;
         }
+        /// <summary>
+        /// Значение координат
+        /// </summary>
+        /// <returns></returns>
+        public double GetX() => x;
+        public double GetY() => y;
+        public double GetZ() => z;
         /// <summary>
         /// Перегружаем оператор сложения
         /// </summary>
@@ -109,7 +116,7 @@ namespace Task_2
         }
 
         /// <summary>
-        /// Данный метод проверяет экземпляры тождество
+        /// Данный метод проверяет экземпляры на тождество
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>        
@@ -130,6 +137,7 @@ namespace Task_2
             hashCode = hash * hashCode + z.GetHashCode();
             return hashCode;
         }
+
     }
 }
     

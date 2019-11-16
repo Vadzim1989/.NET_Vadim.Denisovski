@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Euklides.Tests", "EuklidesA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_2", "Task_2\Task_2.csproj", "{AB7D624F-09FC-4685-8D9F-DD93576AC00E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_2.Tests", "Task_2.Tests\Task_2.Tests.csproj", "{A8BC028D-1C24-427F-83AE-0A238B0C8E9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AB7D624F-09FC-4685-8D9F-DD93576AC00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB7D624F-09FC-4685-8D9F-DD93576AC00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB7D624F-09FC-4685-8D9F-DD93576AC00E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BC028D-1C24-427F-83AE-0A238B0C8E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BC028D-1C24-427F-83AE-0A238B0C8E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BC028D-1C24-427F-83AE-0A238B0C8E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BC028D-1C24-427F-83AE-0A238B0C8E9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
