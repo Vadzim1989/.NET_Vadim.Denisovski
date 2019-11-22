@@ -77,5 +77,29 @@ namespace Task_2
             }
             return new Polynomial(result);
         }
+        /// <summary>
+        /// Оператор вычитания
+        /// </summary>
+        /// <param name="P1"></param>
+        /// <param name="P2"></param>
+        /// <returns>
+        /// Вычитание многочленов
+        /// </returns>
+        public static Polynomial operator -(Polynomial P1, Polynomial P2)
+        {
+            int count = Math.Max(P1.coefficients.Length, P2.coefficients.Length);
+            var result = new double[count];
+            for (int i = 0; i < count; i++)
+            {
+                double z = 0;
+                double x = 0;
+                if (i < P1.coefficients.Length)
+                    z = P1[i];
+                if (i < P2.coefficients.Length)
+                    x = P2[i];
+                result[i] = z - x;
+            }
+            return new Polynomial(result);
+        }
     }
 }
