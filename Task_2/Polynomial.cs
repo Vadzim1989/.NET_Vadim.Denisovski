@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task_2
 {
-    class Polynomial
+    public class Polynomial
     {
         /// <summary>
         /// коэффициенты многочлена
@@ -35,7 +35,10 @@ namespace Task_2
         /// <summary>
         /// Степень многочлена
         /// </summary>
-        public int Degree => coefficients.Length;
+        public int Degree
+        {
+            get { return coefficients.Length; }
+        }
         /// <summary>
         /// Расчет значения многочлена по схеме Горнера
         /// </summary>
@@ -110,17 +113,16 @@ namespace Task_2
         /// Умножение многочленов
         /// </returns>
         public static Polynomial operator *(Polynomial P1, Polynomial P2)
-        {
-            int count = P1.coefficients.Length + P2.coefficients.Length - 1;
-            var result = new double[count];
-            for (int i = 0; i < P1.coefficients.Length; i++)
+        {          
+            Polynomial P3 = new Polynomial(P1.coefficients.Length + P2.coefficients.Length - 1);
+            for (int i = 0; i < P1.coefficients.Length; ++i)
             {
-                for (int j = 0; i < P2.coefficients.Length; j++)
+                for (int j = 0; i < P2.coefficients.Length; ++j)
                 {
-                    result[i + j] += P1[i] * P2[j];
+                    P3[i + j] += P1[i] * P2[j];
                 }
             }
-            return new Polynomial(result);
+            return P3;
         }
         /// <summary>
         /// Оператор равенства
@@ -149,6 +151,11 @@ namespace Task_2
         public static bool operator !=(Polynomial P1, Polynomial P2)
         {
             return !(P1 == P2);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Коэффициенты:*" + string.Join(";*", coefficients));
         }
     }
 }
