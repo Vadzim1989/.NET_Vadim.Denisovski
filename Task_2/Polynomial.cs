@@ -101,5 +101,54 @@ namespace Task_2
             }
             return new Polynomial(result);
         }
+        /// <summary>
+        /// Оператор умножения
+        /// </summary>
+        /// <param name="P1"></param>
+        /// <param name="P2"></param>
+        /// <returns>
+        /// Умножение многочленов
+        /// </returns>
+        public static Polynomial operator *(Polynomial P1, Polynomial P2)
+        {
+            int count = P1.coefficients.Length + P2.coefficients.Length - 1;
+            var result = new double[count];
+            for (int i = 0; i < P1.coefficients.Length; i++)
+            {
+                for (int j = 0; i < P2.coefficients.Length; j++)
+                {
+                    result[i + j] += P1[i] * P2[j];
+                }
+            }
+            return new Polynomial(result);
+        }
+        /// <summary>
+        /// Оператор равенства
+        /// </summary>
+        /// <param name="P1"></param>
+        /// <param name="P2"></param>
+        /// <returns>
+        /// Проверка на равенство многочленов
+        /// </returns>
+        public static bool operator ==(Polynomial P1, Polynomial P2)
+        {
+            if (P1.coefficients.Length != P2.coefficients.Length)
+            {
+                return false;
+            }
+            for (int i = 0; i < P1.coefficients.Length; i++)
+            {
+                if (P1[i] != P2[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool operator !=(Polynomial P1, Polynomial P2)
+        {
+            return !(P1 == P2);
+        }
     }
 }
