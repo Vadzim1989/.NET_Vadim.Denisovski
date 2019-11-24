@@ -51,6 +51,21 @@ namespace Task_2.Tests
         }
 
         [TestMethod]
+        public void operator_multip()
+        {
+            // Arrange
+            Polynomial P1 = new Polynomial(2, 3, 4);
+            Polynomial P2 = new Polynomial(1, 2, 3);
+            int x = 2;
+            double result = 408;
+            // Action
+            Polynomial P3 = P1 * P2;
+            var CalcResult = P3.Calculate(x);
+            // Assert
+            Assert.AreEqual(result, CalcResult);
+        }
+
+        [TestMethod]
         public void operator_equal()
         {
             // Arrange
