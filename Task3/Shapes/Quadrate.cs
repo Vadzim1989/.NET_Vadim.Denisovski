@@ -12,13 +12,13 @@ namespace Task3.Shapes
         /// <summary>
         /// Side
         /// </summary>
-        private int size;
+        private double size;
         /// <summary>
         /// Costructor
         /// </summary>
         /// <param name="material"></param>
         /// <param name="coords"></param>
-        public Quadrate(Material material, params int[] coords):base(material,coords)
+        public Quadrate(Material material, params double[] coords):base(material,coords)
         {
             size = coords[0];
         }

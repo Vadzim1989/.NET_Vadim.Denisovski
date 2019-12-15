@@ -12,13 +12,13 @@ namespace Task3.Shapes
         /// <summary>
         /// Side of triangle
         /// </summary>
-        private int A, B, C;
+        private double A, B, C;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="material"></param>
         /// <param name="coords"></param>
-        public Triangle(Material material, params int[] coords):base(material,coords)
+        public Triangle(Material material, params double[] coords):base(material,coords)
         {
             A = coords[0];
             B = coords[1];

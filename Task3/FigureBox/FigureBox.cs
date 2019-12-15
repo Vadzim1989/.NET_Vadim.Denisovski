@@ -22,6 +22,21 @@ namespace Task3.FigureBox
         /// </summary>
         public FigureBox() { }
         /// <summary>
+        /// Shows the quantity figures
+        /// </summary>
+        /// <returns></returns>
+        public int ShowQuantityFigures()
+        {
+            return Box.Count;
+        }
+        /// <summary>
+        /// Remove all figures from BOX
+        /// </summary>
+        public void ClearBox()
+        {
+            Box.Clear();
+        }
+        /// <summary>
         /// Method to add some figure to BOX
         /// </summary>
         /// <param name="figure"></param>

@@ -9,7 +9,7 @@ namespace Task3.Shapes
     [Serializable]
     public abstract class Figure : IFigureMaterial
     {
-        private int[] coords;
+        private double[] coords;
         public bool IsPainted = false;
         /// <summary>
         /// get/set Materials
@@ -28,7 +28,7 @@ namespace Task3.Shapes
         /// </summary>
         /// <param name="Material"></param>
         /// <param name="coords"></param>
-        public Figure(Material Material = Material.FIlm, params int[] coords)
+        public Figure(Material Material = Material.FIlm, params double[] coords)
         {
             this.Material = Material;
             this.coords = coords;
@@ -65,7 +65,7 @@ namespace Task3.Shapes
             if (obj == null || obj.GetType() != this.GetType())
                 return false;
             return obj is Figure figure &&
-                EqualityComparer<int[]>.Default.Equals(coords, figure.coords) &&
+                EqualityComparer<double[]>.Default.Equals(coords, figure.coords) &&
                 IsPainted == figure.IsPainted &&
                 Material == figure.Material;
         }
@@ -87,7 +87,7 @@ namespace Task3.Shapes
         public override int GetHashCode()
         {
             var hashCode = 1828495945;
-            hashCode = hashCode * -1521134295 + EqualityComparer<int[]>.Default.GetHashCode(coords);
+            hashCode = hashCode * -1521134295 + EqualityComparer<double[]>.Default.GetHashCode(coords);
             hashCode = hashCode * -1521134295 + IsPainted.GetHashCode();
             hashCode = hashCode * -1521134295 + Material.GetHashCode();
             return hashCode;

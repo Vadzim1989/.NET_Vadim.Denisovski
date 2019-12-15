@@ -12,13 +12,13 @@ namespace Task3.Shapes
         /// <summary>
         /// Radius
         /// </summary>
-        public int R;
+        public double R;
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="material"></param>
         /// <param name="coords"></param>
-        public Circle(Material material, params int[] coords):base(material,coords)
+        public Circle(Material material, params double[] coords):base(material,coords)
         {
             R = coords[0];
         }
