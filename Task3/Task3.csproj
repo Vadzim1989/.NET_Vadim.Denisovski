@@ -41,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FigureBoxException\FigureBoxException.cs" />
+    <Compile Include="FigureBox\FigureBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Circle.cs" />
     <Compile Include="Shapes\Figure.cs" />
     <Compile Include="Shapes\IFigureMaterial.cs" />
     <Compile Include="Shapes\Quadrate.cs" />
+    <Compile Include="Shapes\Triangle.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
