@@ -45,6 +45,7 @@
     <Compile Include="Shapes\Coords.cs" />
     <Compile Include="Shapes\Figure.cs" />
     <Compile Include="Shapes\IFigureMaterial.cs" />
+    <Compile Include="Shapes\Quadrate.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
