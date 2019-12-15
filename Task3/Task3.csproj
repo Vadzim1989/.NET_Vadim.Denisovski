@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Coords.cs" />
+    <Compile Include="Shapes\Figure.cs" />
+    <Compile Include="Shapes\IFigureMaterial.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
