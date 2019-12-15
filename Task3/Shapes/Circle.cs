@@ -7,36 +7,36 @@ using System.Threading.Tasks;
 namespace Task3.Shapes
 {
     [Serializable]
-    public class Quadrate : Figure
+    public class Circle : Figure    
     {
         /// <summary>
-        /// Side
+        /// Radius
         /// </summary>
-        private int size;
+        public int R;
         /// <summary>
-        /// Costructor
+        /// Constructor
         /// </summary>
         /// <param name="material"></param>
         /// <param name="coords"></param>
-        public Quadrate(Material material, params int[] coords):base(material,coords)
+        public Circle(Material material, params int[] coords):base(material,coords)
         {
-            size = coords[0];
+            R = coords[0];
         }
         /// <summary>
-        /// Get Perimeter of quadrate
+        /// Get Perimetr of circle
         /// </summary>
         /// <returns></returns>
-        public override double GetPerimeter() => 4 * size;
+        public override double GetPerimeter() => 2 * Math.PI * R;
         /// <summary>
-        /// Get Square of quadrate
+        /// Get Square of circle
         /// </summary>
         /// <returns></returns>
-        public override double GetSquare() => Math.Pow(size, 2);        
+        public override double GetSquare() => Math.PI * Math.Pow(R, 2);
         /// <summary>
         /// Check our figure
         /// </summary>
         /// <param name="figure"></param>
-        public Quadrate(Figure figure)
+        public Circle(Figure figure)
         {
             if (figure.GetSquare() > GetSquare())
                 throw new Exception("You can't cut this shape");
@@ -48,21 +48,21 @@ namespace Task3.Shapes
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var quadrate = obj as Quadrate;
-            return quadrate != null &&
+            var circle = obj as Circle;
+            return circle != null &&
                    base.Equals(obj) &&
-                   size == quadrate.size;
+                   R == circle.R;
         }
         /// <summary>
         /// Equals
         /// </summary>
-        /// <param name="quadrate"></param>
+        /// <param name="figure"></param>
         /// <returns></returns>
-        public bool Equals(Quadrate quadrate)
+        public bool Equals(Circle figure)
         {
-            if (quadrate == null)
+            if (figure == null)
                 return false;
-            return quadrate.size == this.size;
+            return figure.R == this.R;
         }
         /// <summary>
         /// HashCode
@@ -70,11 +70,14 @@ namespace Task3.Shapes
         /// <returns></returns>
         public override int GetHashCode()
         {
-            var hashCode = 1221766130;
+            var hashCode = -63051957;
             hashCode = hashCode * -1521134295 + base.GetHashCode();
-            hashCode = hashCode * -1521134295 + size.GetHashCode();
+            hashCode = hashCode * -1521134295 + R.GetHashCode();
             return hashCode;
         }
-        public override string ToString() => "Quadrate side: " + size + "; perimeter: " + GetPerimeter() + "; square: " + GetSquare();
+        public override string ToString()
+        {
+            return "Circle radius: " + R + "; perimeter " + GetPerimeter() + "; square: " + GetSquare();
+        }
     }
 }
