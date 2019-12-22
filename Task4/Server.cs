@@ -9,7 +9,7 @@ using System.Net.Sockets;
 
 namespace Task4
 {
-    class Server
+    public class Server
     {
         public delegate void MessageFrom(string msg);
         public event MessageFrom MessageFromClient;
