@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task4
 {
-    class ServerEventHandler
+    public class ServerEventHandler
     {
         /// <summary>
         /// Server
