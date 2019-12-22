@@ -8,10 +8,18 @@ namespace Task4
 {
     class ServerEventHandler
     {
+        /// <summary>
+        /// Server
+        /// </summary>
         private Server Server { get; set; }
-
+        /// <summary>
+        /// Client messages
+        /// </summary>
         List<string> clientMsg = new List<string>();
-
+        /// <summary>
+        /// Add message
+        /// </summary>
+        /// <param name="server"></param>
         public void EventHandler(Server server)
         {
             server.MessageFromClient += delegate (string msg)
@@ -19,7 +27,10 @@ namespace Task4
                 clientMsg.Add(msg);
             };
         }
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="server"></param>
         public ServerEventHandler(Server server)
         {
             Server = server;
