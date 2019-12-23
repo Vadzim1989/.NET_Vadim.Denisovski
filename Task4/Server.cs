@@ -52,6 +52,18 @@ namespace Task4
             tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
         /// <summary>
+        /// Send message to client
+        /// </summary>
+        /// <param name="msg"></param>
+        public void serverAnswer(string msg)
+        {
+            var data = Encoding.UTF8.GetBytes(msg);
+            tcpSocket.Connect(tcpEndpoint);
+            tcpSocket.Send(data);
+            tcpSocket.Shutdown(SocketShutdown.Both);
+            tcpSocket.Close();
+        }
+        /// <summary>
         /// Get message from client
         /// </summary>
         public void Start()
@@ -70,10 +82,7 @@ namespace Task4
                 {
                     size = Listener.Receive(receivedBytes);
                     data.Append(Encoding.UTF8.GetString(receivedBytes, 0, size));
-                } while (Listener.Available > 0);
-
-                byte[] msg = Encoding.UTF8.GetBytes("Well Done");
-                Listener.Send(msg);
+                } while (Listener.Available > 0);                
 
                 MessageFromClient?.Invoke(data.ToString());
                 Listener.Shutdown(SocketShutdown.Both);

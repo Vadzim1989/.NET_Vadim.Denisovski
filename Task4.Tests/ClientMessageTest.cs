@@ -10,19 +10,14 @@ namespace Task4.Tests
         [TestMethod]
         public void Send_Client_Message()
         {
+            //Arrange
             Client client = new Client();
             string msg = "Тест";
-            client.Message(msg);
-            ClientEventHandler clientEvent = new ClientEventHandler(client);          
+            //Action
+            client.SendMsg(msg);
+            ClientEventHandler clientEvent = new ClientEventHandler(client);
+            //Assert
             Assert.AreEqual(clientEvent.serverMsg, "Test");
-        }
-
-        [TestMethod]
-        public void Server_Start()
-        {
-            Server server = new Server();
-            server.Start();
-            Client client = new Client();
         }
     }
 }

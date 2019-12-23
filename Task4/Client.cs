@@ -51,14 +51,23 @@ namespace Task4
         /// </summary>
         public event MessageFrom MessageFromServer;
         /// <summary>
-        /// Connect with server. Send/Get message
+        /// Send messeage to server
         /// </summary>
         /// <param name="msg"></param>
-        public void Message(string msg)
-        {
+        public void SendMsg(string msg)
+        {            
             var data = Encoding.UTF8.GetBytes(msg);
             tcpSocket.Connect(tcpEndpoint);
             tcpSocket.Send(data);
+            tcpSocket.Shutdown(SocketShutdown.Both);
+            tcpSocket.Close();
+        }
+        /// <summary>
+        /// Get message from server
+        /// </summary>
+        /// <param name="msg"></param>
+        public string GetMsg()
+        {            
             byte[] receivedBytes = new byte[128];
             var size = 0;
             var serverAnswer = new StringBuilder();
@@ -72,6 +81,7 @@ namespace Task4
             MessageFromServer?.Invoke(serverAnswer.ToString());
             tcpSocket.Shutdown(SocketShutdown.Both);
             tcpSocket.Close();
+            return serverAnswer.ToString();
         }
     }
 }
