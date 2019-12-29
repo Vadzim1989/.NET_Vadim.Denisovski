@@ -7,7 +7,10 @@ using System.Runtime.Serialization;
 
 namespace Task5
 {
-    [Serializable]
+    /// <summary>
+    /// Class STUDENT
+    /// </summary>
+    [Serializable]   
     public class Student : IComparable<Student>
     {
         /// <summary>

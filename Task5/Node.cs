@@ -7,6 +7,10 @@ using System.Runtime.Serialization;
 
 namespace Task5
 {
+    /// <summary>
+    /// Class Node
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [Serializable]
     public class Node<T> where T : IComparable
     {
