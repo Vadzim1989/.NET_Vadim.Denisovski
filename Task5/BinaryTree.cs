@@ -15,198 +15,136 @@ namespace Task5
     public class BinaryTree<T> where T : IComparable
     {
         /// <summary>
-        /// constructor without parameters
+        /// Default constructor
         /// </summary>
-        public BinaryTree() { }
-        /// <summary>
-        /// Contains the number of nodes
-        /// </summary>
-        private int countNode;
-        /// <summary>
-        /// Node with specified data
-        /// </summary>
-        private Node<T> treeNode;
-        /// <summary>
-        /// NEW parent node
-        /// </summary>
-        private Node<T> parentNode;
-        /// <summary>
-        /// Adds the specified data
-        /// </summary>
-        /// <param name="data"></param>
-        public void addNode(T data)
+        public BinaryTree()
         {
-            if (treeNode == null)
+
+        }
+        /// <summary>
+        /// Root node of Binary Tree
+        /// </summary>
+        public Node<T> Root { get; set; }
+        /// <summary>
+        /// Count of nodes in Binary Tree
+        /// </summary>
+        public int Count { get; set; }
+        /// <summary>
+        /// Add new node in Binary Tree. Uses recursion
+        /// </summary>
+        /// <param name="data">Input object(type)</param>
+        public void Add(T data)
+        {
+            var node = new Node<T>(data);
+            if (Root == null)
             {
-                treeNode = new Node<T>(data);
+                Root = node;
+                Count = 1;
+                return;
+            }
+            Add(node, Root);
+        }
+        /// <summary>
+        /// Private method for add new node. Recursion
+        /// </summary>
+        /// <param name="node">Input new node</param>
+        /// <param name="root">Input parent node</param>
+        private void Add(Node<T> node, Node<T> root)
+        {
+            if (node.CompareTo(root) == -1)
+            {
+                if (root.Left == null)
+                {
+                    root.Left = node;
+                    Count++;
+                }
+                else Add(node, root.Left);
             }
             else
             {
-                findNode(treeNode, data);
+                if (root.Right == null)
+                {
+                    root.Right = node;
+                    Count++;
+                }
+                else
+                    Add(node, root.Right);
             }
         }
         /// <summary>
-        /// Finds the node
+        /// Clear Binary Tree for balance
         /// </summary>
-        /// <param name="treeNode"></param>
-        /// <param name="data"></param>
-        private void findNode(Node<T> treeNode, T data)
+        public void Clear()
         {
-
-            if (data.CompareTo(treeNode.Data) < 0)
+            Root = null;
+            Count = 0;
+        }
+        /// <summary>
+        /// Balance Binary Tree for less O. Rebuild Binary Tree
+        /// </summary>
+        public void Balance()
+        {
+            var _temp = new List<T>(Count);
+            _temp = InOrder();
+            var contains = _temp.Count() - 1;
+            Clear();
+            Balance(_temp, 0, contains);
+        }
+        /// <summary>
+        /// Part of recursion of balance Binary Tree. 
+        /// </summary>
+        /// <param name="temp">list with objects of Binary Tree</param>
+        /// <param name="start">start number of part temp List</param>
+        /// <param name="end">end number of part temp List</param>
+        private void Balance(List<T> temp, int start, int end)
+        {
+            if (start > end)
             {
-                if (treeNode.leftNode == null)
-                {
-                    treeNode.leftNode = new Node<T>(data);
-                }
-                else
-                {
-                    findNode(treeNode.leftNode, data);
-                }
+                return;
+            }
+            int mid = (start + end) / 2;
+            Add(temp[mid]);
+            Balance(temp, start, mid - 1);
+            Balance(temp, mid + 1, end);
+        }
+        /// <summary>
+        /// Output sorted objects of Binary Tree
+        /// </summary>
+        /// <returns>Sorted List with objects</returns>
+        public List<T> InOrder()
+        {
+            var output = new List<T>();
+            if (Root != null)
+            {
+                output = InOrder(Root);
+                return output;
             }
             else
             {
-                if (treeNode.rightNode == null)
-                {
-                    treeNode.rightNode = new Node<T>(data);
-                }
-                else
-                {
-                    findNode(treeNode.rightNode, data);
-                }
+                throw new Exception("Empty BinaryTree");
             }
         }
         /// <summary>
-        /// Show information about nodes
+        /// Part of recursion of Inorder output. Adds List to List
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="parentNode"></param>
-        /// <returns></returns>
-        private Node<T> ShowInformation(T data, out Node<T> parentNode)
+        /// <param name="node">Node of Binary Tree</param>
+        /// <returns>Sorted List of elements Binary Tree</returns>
+        private List<T> InOrder(Node<T> node)
         {
-            Node<T> node = treeNode;
-            parentNode = null;
-
-            while (node != null)
+            var output = new List<T>();
+            if (node != null)
             {
-                int result = node.CompareTo(data);
-
-                if (result > 0)
+                if (node.Left != null)
                 {
-                    parentNode = node;
-                    node = node.leftNode;
+                    output.AddRange(InOrder(node.Left));
                 }
-                else if (result < 0)
+                output.Add(node.Data);
+                if (node.Right != null)
                 {
-                    parentNode = node;
-                    node = node.rightNode;
-                }
-                else
-                {
-                    break;
+                    output.AddRange(InOrder(node.Right));
                 }
             }
-
-            return node;
-        }
-        /// <summary>
-        /// Removes the specified node
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public bool RemoveNode(T data)
-        {
-            Node<T> node;
-            Node<T> parentNode;
-
-            node = ShowInformation(data, out parentNode);
-
-            if (node == null)
-            {
-                return false;
-            }
-
-            countNode--;
-
-            if (node.rightNode == null)
-            {
-                if (parentNode == null)
-                {
-                    treeNode = node.leftNode;
-                }
-                else
-                {
-                    int result = parentNode.CompareTo(node.Data);
-                    if (result > 0)
-                    {
-                        parentNode.leftNode = node.leftNode;
-                    }
-                    else if (result < 0)
-                    {
-                        parentNode.rightNode = node.leftNode;
-                    }
-                }
-            }
-            else if (node.rightNode.leftNode == null)
-            {
-                node.rightNode.leftNode = node.leftNode;
-
-                if (parentNode == null)
-                {
-                    treeNode = node.rightNode;
-                }
-                else
-                {
-                    int result = parentNode.CompareTo(node.Data);
-                    if (result > 0)
-                    {
-                        parentNode.leftNode = node.rightNode;
-                    }
-                    else if (result < 0)
-                    {
-                        parentNode.rightNode = node.rightNode;
-                    }
-                }
-            }
-            else
-            {
-                Node<T> leftBranch = node.rightNode.leftNode;
-                Node<T> leftParent = node.rightNode;
-                while (leftBranch.leftNode != null)
-                {
-                    leftParent = leftBranch; leftBranch = leftBranch.leftNode;
-                }
-
-                leftParent.leftNode = leftBranch.rightNode;
-                leftBranch.leftNode = node.leftNode;
-                leftBranch.rightNode = node.rightNode;
-                if (parentNode == null)
-                {
-                    treeNode = leftBranch;
-                }
-                else
-                {
-                    int result = parentNode.CompareTo(node.Data);
-                    if (result > 0)
-                    {
-                        parentNode.rightNode = leftBranch;
-                    }
-                    else if (result < 0)
-                    {
-                        parentNode.rightNode = leftBranch;
-                    }
-                }
-            }
-            return true;
-        }
-        /// <summary>
-        /// object Comparison
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public int CompareTo(object obj)
-        {
-            throw new NotImplementedException();
+            return output;
         }
     }
 }

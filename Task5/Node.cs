@@ -15,68 +15,55 @@ namespace Task5
     public class Node<T> where T : IComparable
     {
         /// <summary>
-        /// Constructor without parameters
+        /// Default Constructor
         /// </summary>
-        public Node() { }
+        public Node()
+        {
+        }
         /// <summary>
-        /// Get/set node data
+        /// Data of object
         /// </summary>
         public T Data { get; set; }
         /// <summary>
-        /// get/set left Node
+        /// Left Node of parent node
         /// </summary>
-        public Node<T> leftNode { get; set; }
+        public Node<T> Left { get; set; }
         /// <summary>
-        /// get/set right Node
+        /// Right Node of parent Node
         /// </summary>
-        public Node<T> rightNode { get; set; }
+        public Node<T> Right { get; set; }
         /// <summary>
-        /// get/set parent Node
+        /// Constructor of node
         /// </summary>
-        public Node<T> parentNode { get; set; }
-        /// <summary>
-        /// Constructor with parameters
-        /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Data of input object</param>
         public Node(T data)
         {
             Data = data;
         }
         /// <summary>
-        /// Data Comparison
+        /// Create parent node with left and right node
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        public int CompareTo(T data)
+        /// <param name="data">Data of input object</param>
+        /// <param name="left">Left Node</param>
+        /// <param name="right">Right Node</param>
+        public Node(T data, Node<T> left, Node<T> right)
         {
-            return Data.CompareTo(data);
+            Data = data;
+            Left = left;
+            Right = right;
         }
         /// <summary>
-        /// Equals
+        /// Realization of IComparable
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
+        /// <param name="other">Input object for compare</param>
+        /// <returns>-1 for less, 0 for equal, 1 for more</returns>
+        public int CompareTo(Node<T> other)
         {
-            var node = obj as Node<T>;
-            return node != null &&
-                   EqualityComparer<T>.Default.Equals(Data, node.Data) &&
-                   EqualityComparer<Node<T>>.Default.Equals(leftNode, node.leftNode) &&
-                   EqualityComparer<Node<T>>.Default.Equals(rightNode, node.rightNode) &&
-                   EqualityComparer<Node<T>>.Default.Equals(parentNode, node.parentNode);
+            if (other is Node<T> c)
+            {
+                return this.Data.CompareTo(c.Data);
+            }
+            else throw new Exception("Wrong node");
         }
-        /// <summary>
-        /// HashCode
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            var hashCode = -1035467789;
-            hashCode = hashCode * -1521134295 + EqualityComparer<T>.Default.GetHashCode(Data);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Node<T>>.Default.GetHashCode(leftNode);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Node<T>>.Default.GetHashCode(rightNode);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Node<T>>.Default.GetHashCode(parentNode);
-            return hashCode;
-        }       
     }
 }

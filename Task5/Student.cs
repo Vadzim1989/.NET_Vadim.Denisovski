@@ -10,131 +10,118 @@ namespace Task5
     /// <summary>
     /// Class STUDENT
     /// </summary>
-    [Serializable]   
-    public class Student : IComparable<Student>
+    [Serializable]
+    public class Student : IComparable
     {
-        /// <summary>
-        /// Student name
-        /// </summary>
         private string studentName;
+        private string testTitle;
+        private int grade;
+        private DateTime dateTest;
         /// <summary>
-        /// test name
+        /// Name of Student
         /// </summary>
-        private string testName;
-        /// <summary>
-        /// student mark
-        /// </summary>
-        private double mark;
-        /// <summary>
-        /// get/set student name
-        /// </summary>
-        public string name
+        public string StudentName
         {
-            get
-            {
-                return studentName;
-            }
+            get => studentName;
             set
             {
-                if (studentName.Length < 1)
-                    throw new Exception("Input some name");
-                studentName = value;
+                if (value.Length < 1)
+                {
+                    throw new Exception("Wrong Name of Student");
+                }
+                else
+                {
+                    studentName = value;
+                }
             }
         }
         /// <summary>
-        /// get/set test name
+        /// Title of the test
         /// </summary>
-        public string TestName
+        public string TestTitle
         {
-            get
-            {
-                return testName;
-            }
+            get => testTitle;
             set
             {
-                if (testName.Length < 1)
-                    throw new Exception("Input some name");
-                testName = value;
+                if (value.Length < 1)
+                {
+                    throw new Exception("Wrong Title of test");
+                }
+                else
+                {
+                    testTitle = value;
+                }
             }
+        }
+        /// <summary>
+        /// Grade of the test
+        /// </summary>
+        public int Grade
+        {
+            get => grade;
+            set
+            {
+                if (value < 0 || value > 100)
+                {
+                    throw new Exception("Wrong grade");
+                }
+                else
+                {
+                    grade = value;
+                }
+            }
+        }
+        /// <summary>
+        /// Date of the test
+        /// </summary>
+        public DateTime DateTest
+        {
+            get => dateTest;
+            set
+            {
+                if (value > DateTime.Now)
+                {
+                    throw new Exception("Wrong Date and/or Time");
+                }
+                else
+                {
+                    dateTest = value;
+                }
+            }
+        }
+        /// <summary>
+        /// Default constructor for XMLSerialization
+        /// </summary>
+        public Student()
+        {
 
         }
         /// <summary>
-        /// get/set date of testing
+        /// Main Constructor for student
         /// </summary>
-        public DateTime TestDate { get; set; }
-        /// <summary>
-        /// get/set mark
-        /// </summary>
-        public double Mark
+        /// <param name="name">Name of student</param>
+        /// <param name="gr">Grade</param>
+        /// <param name="test">Test Title</param>
+        /// <param name="date">Date</param>
+        public Student(string name, int gr, string test, DateTime date)
         {
-            get
+            StudentName = name;
+            Grade = gr;
+            TestTitle = test;
+            DateTest = date;
+        }
+        /// <summary>
+        /// Realization of IComparable
+        /// </summary>
+        /// <param name="obj">Input object</param>
+        /// <returns>-1 for less, 0 for equal, 1 for more</returns>
+        public int CompareTo(object obj)
+        {
+            if (obj is Student c)
             {
-                return mark;
+                return this.grade.CompareTo(c.grade);
             }
-            set
-            {
-                if (value < 0.0 || value > 100.0)
-                    throw new ArgumentException("Mark can not be less than zero and more than one hundred percent.");
-                mark = value;
-            }
-        }
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="sName"></param>
-        /// <param name="tName"></param>
-        /// <param name="dateTime"></param>
-        /// <param name="mark"></param>
-        public Student(string sName, string tName, DateTime dateTime, double mark)
-        {
-            studentName = sName;
-            testName = tName;
-            TestDate = dateTime;
-            this.mark = mark;
-        }
-        /// <summary>
-        /// Student Comparison
-        /// </summary>
-        /// <param name="student"></param>
-        /// <returns></returns>
-        public virtual int CompareTo(Student student)
-        {
-            if (student != null)
-                return this.Mark.CompareTo(student.Mark);
-            else
-                throw new Exception("It is not Student");
-        }
-        /// <summary>
-        /// Equals
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
-        {
-            return obj is Student student &&
-                   studentName == student.studentName &&
-                   testName == student.testName &&
-                   mark == student.mark &&
-                   name == student.name &&
-                   TestName == student.TestName &&
-                   TestDate == student.TestDate &&
-                   Mark == student.Mark;
-        }
-        /// <summary>
-        /// HashCode
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
-        {
-            var hashCode = -1829382906;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(studentName);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(testName);
-            hashCode = hashCode * -1521134295 + mark.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(TestName);
-            hashCode = hashCode * -1521134295 + TestDate.GetHashCode();
-            hashCode = hashCode * -1521134295 + Mark.GetHashCode();
-            return hashCode;
+            else throw new Exception("Wrong Student for Compare");
         }
     }
 }
