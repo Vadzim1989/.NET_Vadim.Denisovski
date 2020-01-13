@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Task3;
 
 namespace Task3.Tests
 {
@@ -28,10 +29,7 @@ namespace Task3.Tests
         public void RectangleXMLTest()
         {
             Box bx = new Box();
-
-
             bx.LoadXML2();
-
             Circle rect = new Circle("paper", "red", 11);
             Circle rect2 = new Circle("paper", "red", 10);
             bx.AddFigure(rect);
