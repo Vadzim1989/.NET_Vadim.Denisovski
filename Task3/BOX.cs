@@ -4,9 +4,11 @@ using System.Xml;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Task3
 {
+    [Serializable]
     /// <summary>
     /// Box of Figures. Max count 20.
     /// </summary>

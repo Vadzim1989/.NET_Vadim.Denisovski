@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task3;
+using System.Runtime.Serialization;
 
 namespace Task3
 {
+    [Serializable]
     /// <summary>
     /// StreamReader and StreamWriter
     /// </summary>
