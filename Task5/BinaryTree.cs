@@ -12,7 +12,7 @@ namespace Task5
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [Serializable]
-    public class BinaryTree<T> : IComparable where T : IComparable
+    public class BinaryTree<T> where T : IComparable
     {
         /// <summary>
         /// constructor without parameters
