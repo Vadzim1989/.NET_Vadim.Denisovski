@@ -45,10 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BOX.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="FiguresAll.cs" />
     <Compile Include="IFigure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="Square.cs" />
+    <Compile Include="Triangle.cs" />
     <Compile Include="XML.cs" />
   </ItemGroup>
   <ItemGroup>
