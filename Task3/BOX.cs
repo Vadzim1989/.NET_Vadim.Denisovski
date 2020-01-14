@@ -17,7 +17,22 @@ namespace Task3
         /// <summary>
         /// List of figures.
         /// </summary>
-        List<Figure> boxoffigure = new List<Figure>(20);
+        List<Figure> boxoffigure;
+        /// <summary>
+        /// Default constructor for box of 20 figures
+        /// </summary>
+        public Box()
+        {
+            boxoffigure = new List<Figure>(20);
+        }
+        /// <summary>
+        /// Constructor for individual capacity of figures
+        /// </summary>
+        /// <param name="c">Capacity of box</param>
+        public Box(int c)
+        {
+            boxoffigure = new List<Figure>(c);
+        }
         /// <summary>
         /// Add new figure into box
         /// </summary>
