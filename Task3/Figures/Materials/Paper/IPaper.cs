@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task3
+namespace Task3.Figures
 {
-    interface IFigure
+    interface IPaper
     {
-        float Area { get; }
-        float Perimeter { get; }
+        Colors Color { get; set; }
+        bool IsPainted { get; set; }
     }
 }

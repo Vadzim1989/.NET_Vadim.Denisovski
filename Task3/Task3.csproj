@@ -44,18 +44,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BOX.cs" />
-    <Compile Include="Circle.cs" />
-    <Compile Include="Figure.cs" />
-    <Compile Include="IFigure.cs" />
+    <Compile Include="Box\Box.cs" />
+    <Compile Include="Create\AllFigures.cs" />
+    <Compile Include="Create\CreateFigures.cs" />
+    <Compile Include="Create\Materials.cs" />
+    <Compile Include="Figures\AllFigures\Circle.cs" />
+    <Compile Include="Figures\AllFigures\Rectangle.cs" />
+    <Compile Include="Figures\AllFigures\Square.cs" />
+    <Compile Include="Figures\AllFigures\Triangle.cs" />
+    <Compile Include="Figures\FilmFigures\CircleMadeByFilm.cs" />
+    <Compile Include="Figures\FilmFigures\RectangleMadeByFilm.cs" />
+    <Compile Include="Figures\FilmFigures\SquareMadeByFilm.cs" />
+    <Compile Include="Figures\FilmFigures\TriangleMadeByFilm.cs" />
+    <Compile Include="Figures\IColors.cs" />
+    <Compile Include="Figures\IFigure.cs" />
+    <Compile Include="Figures\Materials\Film\IFilm.cs" />
+    <Compile Include="Figures\Materials\Paper\IPaper.cs" />
+    <Compile Include="Figures\PaperFigures\CircleMadeByPaper.cs" />
+    <Compile Include="Figures\PaperFigures\RectangleMadeByPaper.cs" />
+    <Compile Include="Figures\PaperFigures\SquareMadeByPaper.cs" />
+    <Compile Include="Figures\PaperFigures\TriangleMadeByPaper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rectangle.cs" />
-    <Compile Include="Square.cs" />
-    <Compile Include="Triangle.cs" />
-    <Compile Include="XML.cs" />
+    <Compile Include="XML\IOXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

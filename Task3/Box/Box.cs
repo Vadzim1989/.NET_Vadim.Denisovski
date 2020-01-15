@@ -4,26 +4,28 @@ using System.Xml;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime.Serialization;
+using Task3.Figures;
+using IOXml;
+
 
 namespace Task3
 {
     [Serializable]
     /// <summary>
-    /// Box of Figures. Max count 20.
+    /// Box of Figures
     /// </summary>
     public class Box
     {
         /// <summary>
         /// List of figures.
         /// </summary>
-        List<Figure> boxoffigure;
+        private List<IFigure> boxoffigure;
         /// <summary>
         /// Default constructor for box of 20 figures
         /// </summary>
         public Box()
         {
-            boxoffigure = new List<Figure>(20);
+            boxoffigure = new List<IFigure>(20);
         }
         /// <summary>
         /// Constructor for individual capacity of figures
@@ -31,15 +33,15 @@ namespace Task3
         /// <param name="c">Capacity of box</param>
         public Box(int c)
         {
-            boxoffigure = new List<Figure>(c);
+            boxoffigure = new List<IFigure>(c);
         }
         /// <summary>
         /// Add new figure into box
         /// </summary>
         /// <param name="f1">Input figure</param>
-        public void AddFigure(Figure f1)
+        public void AddFigure(IFigure f1)
         {
-            if (boxoffigure.Count == 20)
+            if (boxoffigure.Count == boxoffigure.Capacity)
             {
                 throw new Exception("Box is full");
             }
@@ -53,9 +55,9 @@ namespace Task3
         /// </summary>
         /// <param name="f1">Input figure</param>
         /// <param name="i">Index of Figure in box</param>
-        public void AddFigure(Figure f1, int i)
+        public void AddFigure(IFigure f1, int i)
         {
-            if (boxoffigure.Count == 20)
+            if (boxoffigure.Count == boxoffigure.Capacity)
             {
                 throw new Exception("Box is full");
             }
@@ -72,7 +74,7 @@ namespace Task3
         /// View figure by index without remove
         /// </summary>
         /// <param name="i">Index of figure in box</param>
-        public Figure ViewFigure(int i)
+        public IFigure ViewFigure(int i)
         {
             if ((boxoffigure.Count != 0) && (i < boxoffigure.Count))
             {
@@ -100,7 +102,7 @@ namespace Task3
         /// </summary>
         /// <param name="f1">New Figure</param>
         /// <param name="i">Index of figure in box</param>
-        public void ReplaceFigure(Figure f1, int i)
+        public void ReplaceFigure(IFigure f1, int i)
         {
             if ((boxoffigure.Count != 0) && (i < boxoffigure.Count))
             {
@@ -117,7 +119,7 @@ namespace Task3
         /// </summary>
         /// <param name="f1">Figure for search</param>
         /// <returns>Index of figure in box</returns>
-        public string FindFigure(Figure f1)
+        public string FindFigure(IFigure f1)
         {
             string k = null;
             for (int i = 0; i < boxoffigure.Count; i++)
@@ -183,7 +185,7 @@ namespace Task3
         {
             foreach (var i in boxoffigure)
             {
-                if (i.Material == "film")
+                if (i is IFilm)
                 {
                     boxoffigure.Remove(i);
                 }
@@ -192,103 +194,98 @@ namespace Task3
         /// <summary>
         /// Save xml (streamwriter)
         /// </summary>
-        public void SaveXMLAll()
+        public void SaveXMLAll(string output)
         {
-            Stream sxml = new Stream();
-            string txt = "";
-            foreach (var i in boxoffigure)
-            {
-                txt += i.GetXML();
-            }
-            sxml.Write(txt);
+            Xml1 t1 = new Xml1();
+            t1.Write(output, boxoffigure);
         }
         /// <summary>
         /// Save xml (only film)
         /// </summary>
-        public void SaveXMLFilm()
+        public void SaveXMLFilm(string output)
         {
-            Stream sxml = new Stream();
-            string txt = "";
+            Xml1 t1 = new Xml1();
+            List<IFigure> _tempbox = new List<IFigure>(boxoffigure.Count);
             foreach (var i in boxoffigure)
             {
-                if (i.Material == "film")
+                if (i is IFilm)
                 {
-                    txt += i.GetXML();
+                    _tempbox.Add(i);
                 }
             }
-            sxml.Write(txt);
+            t1.Write(output, _tempbox);
         }
         /// <summary>
         /// Save xml (only paper)
         /// </summary>
-        public void SaveXMLPaper()
+        public void SaveXMLPaper(string output)
         {
-            Stream sxml = new Stream();
-            string txt = "";
+            Xml1 t1 = new Xml1();
+            List<IFigure> _tempbox = new List<IFigure>(boxoffigure.Count);
             foreach (var i in boxoffigure)
             {
-                if (i.Material == "paper")
+                if (i is IPaper)
                 {
-                    txt += i.GetXML();
+                    _tempbox.Add(i);
                 }
             }
-            sxml.Write(txt);
+            t1.Write(output, _tempbox);
         }
         /// <summary>
         /// load xml (streamreader)
         /// </summary>
-        public void LoadXML()
+        public void LoadXML(string input)
         {
-            Stream sxml = new Stream();
-            boxoffigure = sxml.Read();
+            Xml1 t1 = new Xml1();
+            boxoffigure = t1.Read(input);
         }
         /// <summary>
         /// Save xml (xmlwriter)
         /// </summary>
-        public void SaveXML2All()
+        public void SaveXML2All(string output)
         {
-            XML wx = new XML();
-            wx.Write(boxoffigure);
+            Xml2 wx = new Xml2();
+            wx.Write(output, boxoffigure);
         }
         /// <summary>
         /// Save xml only film (xmlwriter)
         /// </summary>
-        public void SaveXML2Film()
+        public void SaveXML2Film(string output)
         {
-            XML wx = new XML();
-            List<Figure> filmbox = new List<Figure>();
+            Xml2 wx = new Xml2();
+            List<IFigure> _tempbox = new List<IFigure>(boxoffigure.Count);
             foreach (var i in boxoffigure)
             {
-                if (i.Material == "film")
+                if (i is IFilm)
                 {
-                    filmbox.Add(i);
+                    _tempbox.Add(i);
                 }
             }
-            wx.Write(filmbox);
+            wx.Write(output, _tempbox);
         }
         /// <summary>
         /// Save xml only paper (xmlwriter)
         /// </summary>
-        public void SaveXML2Paper()
+        public void SaveXML2Paper(string output)
         {
-            XML wx = new XML();
-            List<Figure> paperbox = new List<Figure>();
+            Xml2 wx = new Xml2();
+            List<IFigure> _tempbox = new List<IFigure>(boxoffigure.Count);
             foreach (var i in boxoffigure)
             {
-                if (i.Material == "paper")
+                if (i is IPaper)
                 {
-                    paperbox.Add(i);
+                    _tempbox.Add(i);
                 }
             }
-            wx.Write(paperbox);
+            wx.Write(output, _tempbox);
         }
         /// <summary>
         /// load xml (xmlreader)
         /// </summary>
-        public void LoadXML2()
+        public void LoadXML2(string input)
         {
-            XML sx = new XML();
-            boxoffigure = sx.Read();
+            Xml2 t1 = new Xml2();
+            boxoffigure = t1.Read(input);
         }
     }
 }
